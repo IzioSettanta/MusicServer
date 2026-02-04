@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- PERMESSI ESISTENTI -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- ⭐ NUOVI PERMESSI PER AVVIO AUTOMATICO -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <!-- Per evitare che Android uccida il servizio per risparmiare batteria -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+    <permission
+        android:name="com.example.audioextractor.PERMISSION_CONTROL"
+        android:protectionLevel="normal"
+        android:label="Control Audio Extractor Server"/>
+
+    <application
+        android:allowBackup="true"
+        android:label="Music Server"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AudioExtractor"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="31">
+
+        <!-- ACTIVITIES ESISTENTI -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ServiceLauncherActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AudioExtractor" />
+
+        <activity
+            android:name=".TestVideoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AudioExtractor"
+            android:label="Test Video" />
+
+        <!-- SERVICE ESISTENTE -->
+        <service
+            android:name=".HttpServerService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- RECEIVER ESISTENTE -->
+        <receiver
+            android:name=".ExternalCommandReceiver"
+            android:exported="true"
+            android:permission="com.example.audioextractor.PERMISSION_CONTROL">
+            <intent-filter>
+                <action android:name="com.example.audioextractor.action.PLAYER_PLAY"/>
+                <action android:name="com.example.audioextractor.action.PLAYER_PAUSE"/>
+                <action android:name="com.example.audioextractor.action.PLAYER_STOP"/>
+                <action android:name="com.example.audioextractor.action.PLAYER_SEEK"/>
+                <action android:name="com.example.audioextractor.action.EXTPLAY"/>
+                <action android:name="com.example.audioextractor.action.EXTRACT_ONLY"/>
+                <action android:name="com.example.audioextractor.action.SERVER_COMMAND"/>
+                <action android:name="com.example.audioextractor.action.PLAYER_STATUS_REQUEST"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- ⭐ NUOVO: BOOT RECEIVER PER AVVIO AUTOMATICO -->
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:directBootAware="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- FILE PROVIDER ESISTENTE -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+</manifest>

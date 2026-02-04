@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AudioExtractor</string>
+    <string-array name="video_quality_options">
+        <item>360p</item>
+        <item>480p</item>
+        <item>720p</item>
+        <item>1080p</item>
+    </string-array>
+    <string name="permission_control_description">Allows external apps to control the audio extraction server</string>
+    <string name="impostazioni_server">Impostazioni Server</string>
+</resources>

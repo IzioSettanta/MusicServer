@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Salva questo file in res/layout/item_recent_url.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical">
+
+    <!-- Status Icon -->
+    <TextView
+        android:id="@+id/urlStatusIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:text="✅"
+        android:textSize="16sp"
+        android:layout_marginEnd="12dp"/>
+
+    <!-- Content Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/urlTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Title"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <!-- Stats -->
+        <TextView
+            android:id="@+id/urlStatsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Count: 5 • 2h • audio"
+            android:textSize="12sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
