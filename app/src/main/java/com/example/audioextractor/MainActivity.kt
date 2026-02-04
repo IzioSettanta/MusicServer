@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var requestInstallPermissionLauncher: ActivityResultLauncher<Intent>
 
     //AGGIORNAMENTO SERVER
-    private val GITHUB_PAT = "YOUR_API_KEY" // ⚠️ MASSIMA CAUTELA: NON pushare il codice sorgente con un PAT!
+    private val GITHUB_PAT = "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" // ⚠️ MASSIMA CAUTELA: NON pushare il codice sorgente con un PAT!
     private val REPO_OWNER = "IzioSettanta" // Il proprietario del repository
     private val REPO_NAME = "SealUTube" // Il nome del repository
     private val APK_FILE_NAME = "MusicServer.apk" // Aggiornato per riflettere il nome del file su GitHub// Il percorso esatto del file APK all'interno del repository
